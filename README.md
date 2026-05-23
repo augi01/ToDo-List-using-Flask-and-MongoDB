@@ -72,3 +72,107 @@ Stopping the application
 Thanks to Twitter for emoji support with [Twemoji](https://github.com/twitter/twemoji).
 
 Made with ❤️ from Nepal 🇳🇵
+
+
+---
+
+## 🚀 Student Enhancements: Task Comments REST API
+
+I have extended the original author's codebase by implementing a native, machine-to-machine **REST API backend for Task Comments** on the `feature/api-crud` branch. 
+
+### 🛠️ Implementation & Architecture
+* **Database Integration:** Initialized a new `comments` collection inside MongoDB.
+* **Data Formatting:** All requests and responses strictly utilize **JSON** payloads.
+* **Serialization:** Developed custom BSON-to-JSON utility handlers to cleanly serialize MongoDB ObjectIDs into standard string formats.
+
+---
+
+### 📖 OpenAPI / Swagger 3.0 Specification
+
+```yaml
+openapi: 3.0.3
+info:
+  title: ToDo Application - Task Comments REST API
+  version: 1.0.0
+  description: REST API endpoints for managing annotations and comments on tasks.
+paths:
+  /api/comments:
+    post:
+      summary: Create a new task comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - task_id
+                - text
+              properties:
+                task_id:
+                  type: string
+                  example: "62da1234567890abcdef1234"
+                text:
+                  type: string
+                  example: "This is a critical sub-task note."
+      responses:
+        '201':
+          description: Comment created successfully
+        '400':
+          description: Bad Request (Missing required fields)
+    get:
+      summary: Retrieve task comments
+      parameters:
+        - name: task_id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Optional filter to retrieve comments for a specific task
+      responses:
+        '200':
+          description: A JSON array of comment objects
+          
+  /api/comments/{id}:
+    put:
+      summary: Update an existing comment's text
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+                  example: "Updated comment text."
+      responses:
+        '200':
+          description: Comment updated successfully
+        '400':
+          description: Bad Request (Missing text field)
+        '404':
+          description: Comment ID not found
+    delete:
+      summary: Delete a comment
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Comment deleted successfully
+        '400':
+          description: Invalid ID format supplied
+        '404':
+          description: Comment ID not found
