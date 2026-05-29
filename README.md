@@ -1,5 +1,7 @@
 # To-Do-List
 
+# DE GUZMANS EXPLANATION AT THE BOTTOM
+
 To-Do-List is mini-project made with Flask and MongoDB. Dockerfile is also available to make docker image and docker containers.
 
 ## Built using :
