@@ -76,11 +76,12 @@ Made with ❤️ from Nepal 🇳🇵
 
 ---
 
-## 🚀 Student Enhancements: Task Comments REST API
+## DE GUZMANS Enhancement: Task Comments REST API
 
 I have extended the original author's codebase by implementing a native, machine-to-machine **REST API backend for Task Comments** on the `feature/api-crud` branch. 
 
-### 🛠️ Implementation & Architecture
+###  Implementation and Explanation of The Architecture
+
 * **Database Integration:** Initialized a new `comments` collection inside MongoDB.
 * **Data Formatting:** All requests and responses strictly utilize **JSON** payloads.
 * **Serialization:** Developed custom BSON-to-JSON utility handlers to cleanly serialize MongoDB ObjectIDs into standard string formats.
